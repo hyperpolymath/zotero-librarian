@@ -26,13 +26,18 @@ include("patterns.jl")
 include("exif.jl")
 include("zotero_db.jl")
 include("hash_tracker.jl")
+include("zotero_api.jl")
 
 export normalize_library,
        extract_metadata,
        find_generic_files,
        find_duplicates,
        RenameHistory,
-       ZoteroDB
+       ZoteroDB,
+       # API exports
+       ZoteroAPIClient,
+       process_attachments_api,
+       verify_api_key
 
 """
     normalize_library(db_path::String; dry_run::Bool=true)

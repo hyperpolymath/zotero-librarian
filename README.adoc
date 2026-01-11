@@ -75,14 +75,16 @@ julia --project=. -e 'using Pkg; Pkg.instantiate()'
 
 == Usage
 
-=== Preview Changes (Dry Run)
+=== Local Mode (files on disk)
+
+==== Preview Changes (Dry Run)
 
 [source,bash]
 ----
 julia --project=. bin/normalize.jl
 ----
 
-=== Apply Changes
+==== Apply Changes
 
 IMPORTANT: Close Zotero before applying changes!
 
@@ -91,12 +93,40 @@ IMPORTANT: Close Zotero before applying changes!
 julia --project=. bin/normalize.jl --apply
 ----
 
-=== Custom Database Path
+==== Custom Database Path
 
 [source,bash]
 ----
 julia --project=. bin/normalize.jl --db /path/to/zotero.sqlite --apply
 ----
+
+=== Cloud Mode (via Zotero API)
+
+For files stored in Zotero cloud that aren't synced locally.
+
+==== Get API Credentials
+
+1. Go to https://www.zotero.org/settings/keys/new
+2. Create a new key with "Allow library access" and "Allow write access"
+3. Note your User ID from https://www.zotero.org/settings/keys
+
+==== Preview Cloud Changes
+
+[source,bash]
+----
+export ZOTERO_API_KEY=your_api_key_here
+export ZOTERO_USER_ID=your_user_id
+julia --project=. bin/normalize-cloud.jl
+----
+
+==== Apply Cloud Changes
+
+[source,bash]
+----
+julia --project=. bin/normalize-cloud.jl --apply
+----
+
+NOTE: Cloud mode updates attachment *titles* (display names) and stores metadata in the `extra` field. Actual filenames in cloud storage are preserved until files sync locally.
 
 === Save Report
 
