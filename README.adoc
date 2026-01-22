@@ -174,4 +174,4 @@ Support for Zotero Web API for processing cloud-synced libraries directly.
 
 == License
 
-AGPL-3.0-or-later
+PMPL-1.0-or-later
